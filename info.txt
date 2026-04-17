@@ -35,3 +35,5 @@ Document of MongoDB:there are 2 types of databases:
       $gt (greater than)	
       $lte (less than equal to)
       $gte (greater than equal to)
+      $in (this is include. it checks the conditions of any field)
+      
