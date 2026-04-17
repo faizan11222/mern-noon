@@ -1,0 +1,135 @@
+db.students.insertMany([
+  {
+    name:      "Ali Hassan",
+    email:     "ali@gmail.com",
+    course:    "MERN Stack",
+    marks:     88,
+    city:      "Lahore",
+    age:       22,
+    isActive:  true,
+    fees:      25000,
+    enrolledAt: new Date("2024-01-10")
+  },
+  {
+    name:      "Sara Khan",
+    email:     "sara@gmail.com",
+    course:    "React",
+    marks:     92,
+    city:      "Karachi",
+    age:       20,
+    isActive:  true,
+    fees:      18000,
+    enrolledAt: new Date("2024-01-12")
+  },
+  {
+    name:      "Usman Raza",
+    email:     "usman@gmail.com",
+    course:    "Python",
+    marks:     78,
+    city:      "Islamabad",
+    age:       23,
+    isActive:  true,
+    fees:      15000,
+    enrolledAt: new Date("2024-01-15")
+  },
+  {
+    name:      "Hina Malik",
+    email:     "hina@gmail.com",
+    course:    "Node.js",
+    marks:     85,
+    city:      "Lahore",
+    age:       21,
+    isActive:  true,
+    fees:      20000,
+    enrolledAt: new Date("2024-01-18")
+  },
+  {
+    name:      "Bilal Ahmed",
+    email:     "bilal@gmail.com",
+    course:    "MERN Stack",
+    marks:     70,
+    city:      "Karachi",
+    age:       24,
+    isActive:  false,
+    fees:      25000,
+    enrolledAt: new Date("2024-01-20")
+  }
+])
+
+db.students.countDocuments()
+// Output: 5 
+
+// View all students
+db.students.find()
+
+// ── insertOne: Add a new student ──
+db.students.insertOne({
+  name:      "Zara Ahmed",
+  email:     "zara@gmail.com",
+  course:    "Flutter",
+  marks:     90,
+  city:      "Lahore",
+  age:       19,
+  isActive:  true,
+  fees:      22000,
+  enrolledAt: new Date()
+})
+// Returns: { acknowledged: true, insertedId: ObjectId("...") }
+
+// ── insertMany: Add multiple students at once ──
+db.students.insertMany([
+  { name: "Kamran Ali",  email: "kamran@gmail.com", course: "Python",     marks: 65, city: "Peshawar",  isActive: true, fees: 15000, age: 25 },
+  { name: "Ayesha Noor", email: "ayesha@gmail.com", course: "React",      marks: 80, city: "Multan",    isActive: true, fees: 18000, age: 22 }
+])
+// Returns: { acknowledged: true, insertedCount: 2 }
+
+// Count all students now
+db.students.countDocuments()
+// Output: 8 (5 original + Zara + Kamran + Ayesha)
+
+// ── Get ALL students ──
+db.students.find()
+
+// ── Find students from Lahore ──
+db.students.find({ city: "Lahore" })
+// Returns: Ali Hassan, Hina Malik
+
+// ── Find all MERN Stack students ──
+db.students.find({ course: "MERN Stack" })
+// Returns: Ali Hassan, Bilal Ahmed
+
+// ── Find only ACTIVE students ──
+db.students.find({ isActive: true })
+// Returns: Ali, Sara, Usman, Hina (not Bilal — he is inactive)
+
+// ── findOne: Get Sara's profile by email ──
+db.students.findOne({ email: "sara@gmail.com" })
+// Returns: Sara Khan's full document
+
+// ── findOne: Get a student that does not exist ──
+db.students.findOne({ email: "nobody@gmail.com" })
+// Returns: null
+
+// ── Count active students ──
+db.students.countDocuments({ isActive: true })
+// Output: 4
+
+// ── $set: Update Ali's marks ──
+db.students.updateOne(
+  { email: "ali@gmail.com" },
+  { $set: { marks: 95 } }
+)
+// Ali's marks: 88 → 95
+
+// ── $set: Update multiple fields for Usman ──
+db.students.updateOne(
+  { email: "usman@gmail.com" },
+  { $set: { city: "Karachi", age: 24 } }
+)
+
+// ── $inc: Increase Hina's marks by 5 ──
+db.students.updateOne(
+  { email: "hina@gmail.com" },
+  { $inc: { marks: 5 } }
+)
+// Hina's marks: 85 → 90
