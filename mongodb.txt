@@ -110,10 +110,6 @@ db.students.findOne({ email: "sara@gmail.com" })
 db.students.findOne({ email: "nobody@gmail.com" })
 // Returns: null
 
-// ── Count active students ──
-db.students.countDocuments({ isActive: true })
-// Output: 4
-
 // ── $set: Update Ali's marks ──
 db.students.updateOne(
   { email: "ali@gmail.com" },
