@@ -53,3 +53,7 @@ Document of MongoDB:there are 2 types of databases:
 
       Show by ID
       
+
+      in api METHODS, there are 2 parameters
+       - route url
+       - action
