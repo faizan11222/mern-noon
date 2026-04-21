@@ -1,0 +1,44 @@
+use library_db
+
+db.books.insertMany([
+  { title: "Clean Code",              author: "Robert C. Martin",  category: "programming", price: 3500, stock: 25, rating: 4.8, publishedYear: 2008, isAvailable: true  },
+  { title: "The Pragmatic Programmer",   author: "David Thomas",       category: "programming", price: 4200, stock: 15, rating: 4.7, publishedYear: 1999, isAvailable: true  },
+  { title: "Atomic Habits",              author: "James Clear",         category: "self-help",   price: 2800, stock: 40, rating: 4.9, publishedYear: 2018, isAvailable: true  },
+  { title: "Sapiens",                    author: "Yuval Noah Harari",  category: "history",     price: 1800, stock: 60, rating: 4.6, publishedYear: 2011, isAvailable: true  },
+  { title: "Deep Work",                  author: "Cal Newport",         category: "self-help",   price: 2200, stock: 30, rating: 4.5, publishedYear: 2016, isAvailable: true  },
+  { title: "You Don't Know JS",          author: "Kyle Simpson",        category: "programming", price: 3000, stock: 20, rating: 4.6, publishedYear: 2015, isAvailable: true  },
+  { title: "The Alchemist",              author: "Paulo Coelho",         category: "fiction",     price: 1500, stock: 80, rating: 4.7, publishedYear: 1988, isAvailable: true  },
+  { title: "Rich Dad Poor Dad",           author: "Robert Kiyosaki",     category: "finance",     price: 2500, stock: 50, rating: 4.4, publishedYear: 1997, isAvailable: false }
+])
+// Expected: { acknowledged: true, insertedCount: 8 }
+
+
+
+A new book just arrived at the bookstore. Use insertOne() to add it:
+Insert "The Psychology of Money" by Morgan Housel, category: finance, price: 2600, stock: 35, rating: 4.8, publishedYear: 2020, isAvailable: true
+After inserting, what does the returned object contain? What is insertedId?
+Run db.books.countDocuments() before and after — confirm count went from 8 to 9
+Now try inserting the same book again (same title, different price). Does it work? Why?
+
+
+The bookstore is adding a new "science" category. Use insertMany() to add 3 science books at once:
+Book 1: "A Brief History of Time" — Stephen Hawking — science — ₨1900 — stock: 45 — rating: 4.7 — 1988
+Book 2: "The Gene" — Siddhartha Mukherjee — science — ₨3200 — stock: 20 — rating: 4.6 — 2016
+Book 3: "Cosmos" — Carl Sagan — science — ₨2100 — stock: 35 — rating: 4.8 — 1980
+
+
+Imagine these are the queries your bookstore website needs. Write them all:
+Show ALL books (the main catalogue page)
+Find all books in the "programming" category
+Find only books that are currently available (isAvailable: true)
+Find the book titled "Atomic Habits" using findOne()
+Try to find a book titled "Harry Potter" — what does MongoDB return?
+Count how many programming books exist
+
+
+The bookstore manager needs to update records. Run these updates on our books collection:
+"The Alchemist" got a new edition — use $set to update its price to ₨1800 and publishedYear to 2023
+5 copies of "Clean Code" were sold — use $inc to decrease its stock by 5
+"Rich Dad Poor Dad" is back in stock — use $set to set isAvailable: true
+After each update, run findOne() on that book to verify the change
+
