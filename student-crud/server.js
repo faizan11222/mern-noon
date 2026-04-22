@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+//import route file
+const studentRoutes = require('./routes/studentroutes');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -17,6 +19,10 @@ app.use(express.json());
 
 // Enable CORS for all routes
 app.use(cors());
+
+//localhost:4000/api/add
+//localhost:4000/api/getall
+app.use('/api',studentRoutes);
 
 //creating route for testing
 app.get('/test',(req,res) => {
