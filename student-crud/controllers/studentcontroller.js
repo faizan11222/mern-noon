@@ -49,4 +49,33 @@ const getAllStudents = async(req,res) =>{
     }
 }
 
-module.exports = {addStudent, getAllStudents};
+//API for getting data of any specific student
+const getStudentID = async (req,res) => {
+    try{
+        const student = await Student.findById(req.params.id)
+        if(!student){
+            return res.status(404).json({
+                success:false,
+                message:'Student not found'
+            })
+        }
+        //if student found
+        res.status(200).json({
+            success:true,
+            message:'Student Found!',
+            data:student
+        })
+
+    }catch(error){
+        //checking if the ID is in valid format or not
+        if(error.name === 'CastError'){
+            return res.status(400).json({
+                success:false,
+                message:'Invalid ID format'
+            })
+        }
+
+    }
+}
+
+module.exports = {addStudent, getAllStudents, getStudentID};
