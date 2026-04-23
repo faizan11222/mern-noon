@@ -1,0 +1,8 @@
+Project documentation:
+ - Number of group members 
+ - Each person name and role in project
+ - project name
+ - project details
+    - project overview
+    - problem statement
+    - Each module detail in project

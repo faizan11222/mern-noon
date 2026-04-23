@@ -26,4 +26,27 @@ const addStudent = async(req,res) => {
 
     }
 }
-module.exports = {addStudent};
+
+//API for getting all the data of student
+const getAllStudents = async(req,res) =>{
+    try{
+        const students = await Student.find();
+
+        res.status(200).json({
+            success:true,
+            message:'All students fetched successfully!',
+            //getting students count
+            count: students.length,
+            //displaying the students data
+            data:students
+        })
+    }catch(error){
+        res.status(500).json({
+            success:false,
+            message:'Server error!',
+            error: error.message
+        })
+    }
+}
+
+module.exports = {addStudent, getAllStudents};
