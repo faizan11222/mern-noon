@@ -78,4 +78,69 @@ const getStudentID = async (req,res) => {
     }
 }
 
-module.exports = {addStudent, getAllStudents, getStudentID};
+//API for updating the data
+const updateStudent = async(req,res) => {
+    try{
+    const {name,email,course,city,marks} = req.body;
+    
+   
+    //getting the student previous data to update
+    const updateData = {};
+    //getting the previous values from database
+    updateData.name = name;
+    updateData.email = email;
+    updateData.course = course;
+    updateData.marks = marks;
+    updateData.city = city;
+
+    //finally updating the data into database
+    const student = await Student.findByIdAndUpdate(
+        req.params.id, updateData,
+        
+    )
+    //validating if student not found
+    if(!student){
+        return res.status(404).json({
+            success:false,
+            message:'Student not found!'
+        })
+    }
+    return res.status(200).json({
+            success:true,
+            message:'Student data updated successfully!',
+            data:student
+        })
+    }catch(error){
+         if(error.name == 'CastError'){
+        return res.status(400).json({
+            success:false,
+            message:'Invalid ID format'
+        })
+        res.status(500).json({
+            success:false,
+            message:'Server error'
+        })
+    }
+    }
+}
+
+//API for deleting the student record
+const deleteStudent = async (req,res) => {
+    try{
+        const student = await Student.findByIdAndDelete(req.params.id);
+    //    if(!student){
+    //     return res.status(404).json({
+    //         success:false,
+    //         message:'Student do not exist'
+    //     })
+    //}
+        res.status(200).json({
+            success:true,
+            message:'Student deleted successfully!'
+        })
+    }catch(error){
+
+    }
+}
+
+module.exports = {addStudent, getAllStudents, getStudentID, updateStudent, deleteStudent};
