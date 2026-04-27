@@ -1,11 +1,13 @@
-import BasicExample from "./components/navbar"
-
+import Navbarmain from "./components/navbar"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App() {
  
 
   return (
-   <BasicExample />
+    <BrowserRouter>
+   <Navbarmain />
+   </BrowserRouter>
   )
 }
 
