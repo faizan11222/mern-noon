@@ -17,7 +17,7 @@ export const getStudentById = async(id) => (await api.get(`/api/students/student
 export const addStudent = async(data) => (await api.post('/api/students/addstudent', data)).data
 
 //creating a function to update students API
-export const updateStudent = async(id,data) => (await api.post(`/api/students/updatestudent/${id}`, data)).data
+export const updateStudent = async(id,data) => (await api.put(`/api/students/updatestudent/${id}`, data)).data
 
 //creating a function to delete students API
 export const deleteStudent = async(id) => (await api.delete(`/api/students/deletestudent/${id}`)).data
