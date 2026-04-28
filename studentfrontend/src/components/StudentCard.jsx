@@ -1,15 +1,15 @@
 import { Card, Button, Badge } from "react-bootstrap";
-const StudentCard = () => {
+const StudentCard = ({ student }) => {
     return(
       <Card style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>Faizan Sohail</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">faizan@gmail.com</Card.Subtitle>
-        <Card.Text>
-          <div><strong>Course:</strong>React</div>
-          <div><strong>City:</strong>Lahore</div>
-          <div><strong>Marks: </strong><Badge>80</Badge></div>
-        </Card.Text>
+        <Card.Title>{student.name}</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">{student.email}</Card.Subtitle>
+        <div className="card-text">
+          <div><strong>Course:</strong>{student.course}</div>
+          <div><strong>City:</strong>{student.city}</div>
+          <div><strong>Marks: </strong><Badge>{student.marks}</Badge></div>
+        </div>
       </Card.Body>
       <Card.Footer>
         <Button variant="success">Edit</Button>{' '}

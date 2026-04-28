@@ -22,7 +22,7 @@ app.use(cors());
 
 //localhost:4000/api/add
 //localhost:4000/api/getall
-app.use('/api',studentRoutes);
+app.use('/api/students',studentRoutes);
 
 //creating route for testing
 app.get('/test',(req,res) => {
