@@ -1,7 +1,14 @@
 import { Card, Button, Badge } from "react-bootstrap";
-const StudentCard = ({ student }) => {
-    return(
-      <Card style={{ width: '18rem' }}>
+const StudentCard = ({ student, onDelete }) => {
+
+  //creating a function that give us pop-up ofr confirmation
+  const handleDelete = () => {
+    if(window.confirm(`Are you sure you want to delete:  ${student.name}`)){
+      onDelete(student._id);
+    }
+  }
+    return( 
+      <Card style={{ width: '28rem', marginBottom:'2rem' }}>
       <Card.Body>
         <Card.Title>{student.name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{student.email}</Card.Subtitle>
@@ -13,7 +20,7 @@ const StudentCard = ({ student }) => {
       </Card.Body>
       <Card.Footer>
         <Button variant="success">Edit</Button>{' '}
-        <Button variant="danger">Delete</Button>
+        <Button variant="danger" onClick={handleDelete}>Delete</Button>
       </Card.Footer>
     </Card>
     )

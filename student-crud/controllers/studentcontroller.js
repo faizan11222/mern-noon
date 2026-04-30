@@ -23,7 +23,17 @@ const addStudent = async(req,res) => {
             message:'Student has been created successfully'
         })
     }catch(error){
-
+        if(error.code === 11000){
+            return res.status(400).json({
+                success:false,
+                message:'Email already exists'
+            })
+        }
+        return res.status(500).json({
+            success:false,
+            message:'Server error',
+            error: error.message
+        })
     }
 }
 
@@ -139,7 +149,11 @@ const deleteStudent = async (req,res) => {
             message:'Student deleted successfully!'
         })
     }catch(error){
-
+        res.status(500).json({
+            success:false,
+            message:'Server error',
+            error: error.message
+        })
     }
 }
 
