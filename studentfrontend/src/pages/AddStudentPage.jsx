@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap"
+import { addStudent } from "../../api/studentapi";
+import { useNavigate } from 'react-router-dom';
 
 //array of courses
 const COURSES = ['MERN','React','Android','AI','Graphic'];
 
 const AddStudentPage = () => {
+  //using navigator to redirect the page
+  const navigate = useNavigate();
    //hook that captures the input field values and update them
-   const [formData, setFormData] = useState();
+   const [formData, setFormData] = useState({
+    name:'',
+    email:'',
+    course:'',
+    marks:'',
+    city:''
+   });
    //hook for loading state
     const [loading, setLoading] = useState(false);
     //hook for error handling
@@ -14,14 +24,27 @@ const AddStudentPage = () => {
     //hook for handling the messages
     const [message, setMessage] = useState(null);
 
-    const handleChange = () => {
-      console.log('hi');
+    const handleChange = (e) => {
+      const {name,value} = e.target;
+      //passing my all input fields values into hook
+      setFormData(prev => ({...prev,[name]:value}))
+      console.log('updated data: ',{...formData,[name]:value})
+    }
+
+    //function that will run when user click the submit button of form
+    const handleSubmit = async(e) => {
+      //prevent button for refreshing the page
+      e.preventDefault();
+      //calling the backend API
+      const data = await addStudent({...formData});
+      //redirecting to main page
+      setTimeout(() => navigate('/'),2000)
     }
     return(
         <div>
          <Container>
             <h1>Add Student Data</h1>
-        <Form>
+        <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Name:</Form.Label>
         <Form.Control onChange={handleChange} type="text" name="name" placeholder="Enter name" />
