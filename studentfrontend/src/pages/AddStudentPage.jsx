@@ -40,6 +40,29 @@ const AddStudentPage = () => {
       //redirecting to main page
       setTimeout(() => navigate('/'),2000)
     }
+
+    //function that handle form validations
+    const validateForm = () => {
+      const newErrors = {};
+      if(!formData.name){
+        newErrors.name = 'Please enter your Full name!'
+      }
+      if(!formData.email){
+        newErrors.email = 'Please enter your Email!'
+      }
+      if(!formData.course){
+        newErrors.course = 'Please select your course!'
+      }
+      if(formData.marks === ''){
+        newErrors.marks = 'Marks field is required. Enter marks!'
+      }
+      if(!formData.city){
+        newErrors.city = 'Please enter your City!'
+      }
+      //passing all the errors to Hook
+      setError(newErrors)
+      
+    }
     return(
         <div>
          <Container>
