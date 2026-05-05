@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { deleteStudent, getAllStudents } from "../../api/studentapi";
 import StudentCard from "../components/StudentCard";
-import { Alert, Col, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 
 const HomePage = () => {
     //hook for getting students data
@@ -49,7 +49,8 @@ const HomePage = () => {
      }
     return (
         <div>
-            <h1>All Students Data</h1>
+            <Container fluid>
+            <h1 style={{ "textAlign":"center" }}>All Students Data</h1>
             {message && (
                 <Alert variant={message.variant}>{message.text}</Alert>
             )}
@@ -61,6 +62,7 @@ const HomePage = () => {
                 </Col>
             ))}
             </Row>
+            </Container>
         </div>
     )
 }
