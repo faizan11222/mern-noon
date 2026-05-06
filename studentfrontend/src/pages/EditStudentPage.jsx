@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap"
+import { Alert, Button, Container, Form } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom";
 import { getStudentById, updateStudent } from "../../api/studentapi";
 
@@ -66,9 +66,11 @@ const EditStudentPage = () => {
       setSubmitting(true);
       //calling the backend API
       const data = await updateStudent(id,{...formData});
+      setMessage({variant:'success',text:data.message})
       //redirecting to main page
       setTimeout(() => navigate('/'),2000)
       }catch(err){
+        setMessage({variant:'danger',text:'Could not edit the student'})
         console.log(err);
       }finally{
         setSubmitting(false);
@@ -78,10 +80,13 @@ const EditStudentPage = () => {
         <div>
             <Container>
                 <h1>Edit Student Record</h1>
+                {
+                  message && <Alert variant={message.variant}>{message.text}</Alert>
+                }
                 <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Name:</Form.Label>
-        <Form.Control value="{formData.name}" onChange={handleChange} type="text" name="name" placeholder="Enter name" />
+        <Form.Control value={formData.name} onChange={handleChange} type="text" name="name" placeholder="Enter name" />
         <Form.Text className="text-muted">
           Please enter your full name
         </Form.Text>
