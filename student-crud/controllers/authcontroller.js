@@ -16,6 +16,14 @@ const signToken = (id) =>
             if(!name || !email || !password){
                 return res.status(400).json({success:false, message:'please enter the required fields'})
             }
+
+            //check if the email already exists into database or not
+            const existingUser = await User.findOne({email})
+            if(existingUser){
+                return res.status(400).json({success:false, message:'This email already registered!'})
+            }
+            //if email is new then save the user data
+            
         }catch(error){
 
         }
