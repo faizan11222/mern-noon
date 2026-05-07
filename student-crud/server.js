@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 //import route file
 const studentRoutes = require('./routes/studentroutes');
+const authRoutes = require('./routes/authroutes');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -23,6 +24,9 @@ app.use(cors());
 //localhost:4000/api/add
 //localhost:4000/api/getall
 app.use('/api/students',studentRoutes);
+
+//registerting the auth routes
+app.use('/api/auth',authRoutes);
 
 //creating route for testing
 app.get('/test',(req,res) => {

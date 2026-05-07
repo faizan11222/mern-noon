@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const user = require('../models/user');
 
 //registering the jwt for apis
 const signToken = (id) => 
@@ -23,8 +24,22 @@ const signToken = (id) =>
                 return res.status(400).json({success:false, message:'This email already registered!'})
             }
             //if email is new then save the user data
-            
-        }catch(error){
+            const user = await User.create({ name,email,password })
+            //generating a token for new registered user
+            const token = signToken(user._id);
 
+            res.status(201).json({
+                success:true,
+                message:'Account created successfully!',
+                token,
+                user:{id:user._id, name:name, email:email, role:user.role}
+            })
+        }catch(error){
+            return res.status(500).json({
+                success:false,
+                message:'Something went wrong!'
+            })
         }
     }
+
+    module.exports = {register}
