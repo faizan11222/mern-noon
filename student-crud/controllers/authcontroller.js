@@ -42,4 +42,39 @@ const signToken = (id) =>
         }
     }
 
-    module.exports = {register}
+    //creating a login POST API
+    const login = async(req,res) => {
+        try{
+             const {email,password} = req.body;
+
+              //validation
+            if(!email || !password){
+                return res.status(400).json({success:false, message:'please enter the required fields'})
+            }
+            const user = await User.findOne({email}).select('+password')
+
+            //if email or password is not matched
+            if(!user || !(await user.matchPassword(password))){
+                return res.status(401).json({
+                    sucesss:false,
+                    message:'Invalide username or password'
+                })
+            }
+            //if email and password are correct then get user token and login
+            const token = signToken(user._id)
+            res.status(200).json({
+                success:true,
+                message:'Login successfully!',
+                token,
+                user:{id:user._id, name:user.name, email:user.email, role:user.role}
+            })
+        }catch(error){
+                return res.status(500).json({
+                success:false,
+                message:'Something went wrong!'
+            })
+        }
+    }
+
+
+    module.exports = {register, login}
