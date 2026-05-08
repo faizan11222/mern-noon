@@ -15,7 +15,7 @@ const protect = async (req,res,next) => {
 
    try{
     //verify the token using our secret key from env file
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     //find the user by id from decoded token and attach to req object
     const user = await User.findById(decoded.id).select('-password');
