@@ -66,7 +66,7 @@ const AddStudentPage = () => {
     return(
         <div>
          <Container>
-            <h1>Add Student Data</h1>
+            <h1>Add Student Record</h1>
         <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Name:</Form.Label>
